@@ -13,14 +13,14 @@ public class Movement : MonoBehaviour
     [Header("Speed and Movement (Main)")]
     public float playerSpeed; // Basic player speed value
     private Vector2 moveDirection;
-    private bool isMoving; // Check if player is currently moving
+    public bool isMoving; // Check if player is currently moving
 
     [Header("Sprinting Settings (Secondary)")]
     [Tooltip("Additional speed boost applied when sprinting.")]
     public float sprintBoost; // Amount the player gets as a speed boost, more than 1 required
-    private bool isSprinting = false;
+    public bool isSprinting = false;
     public float stamina; // Current stamina amount
-    private float maxStamina; 
+    public float maxStamina; 
     public Slider staminaBar; // Game Object for stamina bar
     public float staminaLoss; // How much stamina is lost per second
     public float staminaRegenThreshold; // Threshold below which stamina regen stops
