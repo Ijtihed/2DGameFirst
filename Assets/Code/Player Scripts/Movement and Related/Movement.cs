@@ -60,11 +60,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(moveDown_key)) { moveDirection.y = -1; }
 
         //Sprinting Input (Shortened)
-        if (Input.GetKey(Sprint) && stamina > 0 && isMoving)
+        if (Input.GetKey(Sprint) && (isSprinting || stamina > staminaRegenThreshold) && isMoving)
         {
             isSprinting = true;
         }
-        else
+        else if (!Input.GetKey(Sprint) || stamina <= 0)
         {
             isSprinting = false;
         }
@@ -94,15 +94,22 @@ public class Movement : MonoBehaviour
     }
     private void DecreaseStamina()
     {
-        if (stamina > 0)
+        if (stamina > 0 && isSprinting)
         {
             float newStamina = stamina - staminaLoss * Time.deltaTime;
-            if (newStamina < staminaRegenThreshold && stamina >= staminaRegenThreshold)
-            {
-                // Start or reset the cooldown timer
-                regenCooldownTimer = regenCooldown;
-            }
             stamina = Mathf.Max(newStamina, 0); // Ensure stamina doesn't go below 0
+
+            if (stamina <= 0)
+            {
+                // Stop sprinting if stamina reaches 0
+                isSprinting = false;
+            }
+        }
+
+        if (stamina < staminaRegenThreshold && stamina > 0)
+        {
+            // Start or reset the cooldown timer
+            regenCooldownTimer = regenCooldown;
         }
     }
 
