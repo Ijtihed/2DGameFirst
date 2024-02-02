@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     public float playerSpeed; // Basic player speed value
     private Vector2 moveDirection;
     public bool isMoving; // Check if player is currently moving
+    private Vector2 lastMoveDirection;
 
     [Header("Controls for Movement")] // Defining controls to be edited in the UI
     public KeyCode moveLeft_key;
@@ -33,50 +34,44 @@ public class Movement : MonoBehaviour
 
     void ProcessInputs()
     {
-        // Check horizontal movement
-        if (Input.GetKey(moveLeft_key))
+        Vector2 inputDirection = Vector2.zero;
+
+        if (Input.GetKey(moveLeft_key)) { inputDirection.x = -1; }
+        if (Input.GetKey(moveRight_key)) { inputDirection.x = 1; }
+        if (Input.GetKey(moveUp_key)) { inputDirection.y = 1; }
+        if (Input.GetKey(moveDown_key)) { inputDirection.y = -1; }
+
+        if (inputDirection != Vector2.zero)
         {
-            moveDirection.x = -1;
-        }
-        else if (Input.GetKey(moveRight_key))
-        {
-            moveDirection.x = 1;
+            moveDirection = inputDirection;
+            lastMoveDirection = inputDirection; // Update lastMoveDirection only when there's input
+            isMoving = true;
         }
         else
         {
-            // If neither left nor right is pressed, reset the horizontal movement to 0
-            moveDirection.x = 0;
+            isMoving = false;
         }
-
-        // Check vertical movement
-        if (Input.GetKey(moveUp_key))
-        {
-            moveDirection.y = 1;
-        }
-        else if (Input.GetKey(moveDown_key))
-        {
-            moveDirection.y = -1;
-        }
-        else
-        {
-            // If neither up nor down is pressed, reset the vertical movement to 0
-            moveDirection.y = 0;
-        }
-
-        // Check if the player is moving
-        isMoving = moveDirection.magnitude > 0.01f;
     }
-
-
     void Move()
     {
         // Function for Movement
         player.velocity = new Vector2(moveDirection.x * playerSpeed, moveDirection.y * playerSpeed).normalized;
+        anim.SetBool("isMoving", isMoving);
     }
-
     void Animate()
     {
-        anim.SetFloat("AnimMoveX", moveDirection.x);
-        anim.SetFloat("AnimMoveY", moveDirection.y);
+        if (isMoving)
+        {
+            // Use moveDirection for animation when the player is moving
+            anim.SetFloat("AnimMoveX", moveDirection.x);
+            anim.SetFloat("AnimMoveY", moveDirection.y);
+        }
+        else
+        {
+            // Use lastMoveDirection to maintain the last facing direction in idle
+            anim.SetFloat("AnimMoveX", lastMoveDirection.x);
+            anim.SetFloat("AnimMoveY", lastMoveDirection.y); // Keep the lastMoveDirection.y for up and down idle animations
+        }
     }
+
 }
