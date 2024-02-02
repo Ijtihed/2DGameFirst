@@ -54,10 +54,19 @@ public class Movement : MonoBehaviour
     }
     void Move()
     {
-        // Function for Movement
-        player.velocity = new Vector2(moveDirection.x * playerSpeed, moveDirection.y * playerSpeed).normalized;
+        if (isMoving)
+        {
+            // Function for Movement
+            player.velocity = new Vector2(moveDirection.x * playerSpeed, moveDirection.y * playerSpeed);
+        }
+        else
+        {
+            // Immediately stop the player when there's no input
+            player.velocity = Vector2.zero;
+        }
         anim.SetBool("isMoving", isMoving);
     }
+
     void Animate()
     {
         if (isMoving)
