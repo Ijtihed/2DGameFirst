@@ -1,2 +1,5 @@
 # 2DGameFirst
-First version of my newest 2D game.
+
+Blood Pivot source code.
+
+Small project that I'm working on, will go private as soon as finalized.
