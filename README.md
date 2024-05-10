@@ -39,7 +39,8 @@ Screenshots are available on the [Steam page](https://store.steampowered.com/app
 
 - **Developer:** Ijtihed Kilani
 - **Artist:** Ashley Qiao ([LinkedIn](https://www.linkedin.com/in/ashley-qiao-a0036b253/))
-
+- **Support:** Ahmed Safi (confused_guy)
+ 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
