@@ -39,7 +39,7 @@ Screenshots are available on the [Steam page](https://store.steampowered.com/app
 
 - **Developer:** Ijtihed Kilani
 - **Artist:** Ashley Qiao ([LinkedIn](https://www.linkedin.com/in/ashley-qiao-a0036b253/))
-- **Support:** Ahmed Safi (confused_guy)
+- **Support Artist/Dev:** Ahmed Safi [(confused_guy)](https://www.linkedin.com/in/safi-abidi-388571265/)
  
 ## License
 
